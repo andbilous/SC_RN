@@ -1,0 +1,8 @@
+// flow
+const CreditCardInfoTypes = {
+  SUBMIT_FORM_REQUEST: 'SUBMIT_FORM_REQUEST',
+  SUBMIT_FORM_SUCCESS: 'SUBMIT_FORM_SUCCESS',
+  SUBMIT_FORM_FAILURE: 'SUBMIT_FORM_FAILURE',
+};
+
+export default CreditCardInfoTypes;
