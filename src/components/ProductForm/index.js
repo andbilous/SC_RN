@@ -1,1 +1,1 @@
-export {default} from './ProductFormContainer';
+export {default} from './ProductForm';

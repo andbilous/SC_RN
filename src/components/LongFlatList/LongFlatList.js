@@ -1,40 +1,10 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable no-plusplus */
-/* eslint-disable class-methods-use-this */
 //  @flow
 import React from 'react';
-import {View, StyleSheet, FlatList, Text, Image} from 'react-native';
+import {
+  View, StyleSheet, FlatList, Text, Image
+} from 'react-native';
+import useLongFlatList from './useLongFlatList';
 
-type Props = {
-  dataToRender: [],
-};
-
-// const LongFlatList = (props: Props) => (
-const LongFlatList = ({dataToRender}: Props) => {
-  console.log(dataToRender);
-  return (
-    <FlatList
-      numColumns={2}
-      data={dataToRender}
-      renderItem={({item}) => (
-        <View key={item.firstName} style={styles.listItem}>
-          <Text>Number : {item.number}</Text>
-          <Text>Firstname : {item.firstName}</Text>
-          <Text>Lastname : {item.lastName}</Text>
-          <Image
-            style={styles.image}
-            source={{
-              uri: `https://picsum.photos/id/${Math.floor(
-                Math.random() * 100,
-              )}/150/150`,
-            }}
-          />
-        </View>
-      )}
-      keyExtractor={(item, index) => index.toString()}
-    />
-  );
-};
 const styles = StyleSheet.create({
   listItem: {
     flex: 1,
@@ -50,4 +20,31 @@ const styles = StyleSheet.create({
     height: 250,
   },
 });
+const LongFlatList = () => (
+  <FlatList
+    numColumns={2}
+    data={useLongFlatList().dataToRender}
+    extraData={useLongFlatList().dataToRender}
+    renderItem={({ item }) => (
+      <View key={item.id} style={styles.listItem}>
+        <Text>
+Number :
+          {item.id}
+        </Text>
+        <Text>
+Name :
+          {item.name}
+        </Text>
+        <Image
+          style={styles.image}
+          source={{
+            uri: item.url,
+          }}
+        />
+      </View>
+    )}
+    keyExtractor={(item, index) => index.toString()}
+  />
+);
+
 export default LongFlatList;

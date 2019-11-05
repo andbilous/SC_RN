@@ -1,4 +1,5 @@
 // flow
+
 class CreditCardInfoService {
   constructor(creditCardInfo) {
     this.cardNumber = creditCardInfo.cardNumber ? creditCardInfo.cardNumber : 1;

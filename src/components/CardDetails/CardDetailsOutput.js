@@ -2,14 +2,14 @@
 //  @flow
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import useCardDetails from './useCardDetails';
 
-
-const FormikUserOutput = ({ submitResult }) => (
+const CardDetailsOutput = () => (
   <View>
-    <Text style={submitResult.toLowerCase().includes('error')
+    <Text style={useCardDetails().submitResult.toLowerCase().includes('error')
       ? styles.titleError : styles.titleSubmit}
     >
-      {submitResult}
+      {useCardDetails().submitResult}
 
     </Text>
   </View>
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
     marginBottom: 2
   }
 });
-export default FormikUserOutput;
+export default CardDetailsOutput;

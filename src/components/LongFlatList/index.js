@@ -1,1 +1,1 @@
-export {default} from './LongFlatListContainer';
+export {default} from './LongFlatList';

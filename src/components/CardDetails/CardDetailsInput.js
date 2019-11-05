@@ -9,19 +9,20 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
+import useCardDetails from './useCardDetails';
 import { submitForm } from '../../redux/creditCardInfo/creditCardInfo.actions';
 
 type Props = {
   errors:[]
 }
 
-function FormikUserInput(props:Props) {
+function CardDetailsInput(props:Props) {
   return (
     <ScrollView style={styles.container}>
       <Formik
         validateOnChange={false}
         validateOnBlur={false}
-        onSubmit={(values) => { submitForm(values); }}
+        onSubmit={(values) => { submitForm(values); useCardDetails().handleSubmit(values); }}
       >
         {(formikProps) => (
           <View style={styles.container}>
@@ -178,11 +179,11 @@ const styles = StyleSheet.create({
 
 });
 
-const FormikUserInputContainer = connect(
+const CardDetailsInputContainer = connect(
   (state) => ({
     errors: state.creditCardInfoReducer.errors
   }), { submitForm }
-)(FormikUserInput);
+)(CardDetailsInput);
 
 // eslint-disable-next-line import/prefer-default-export
-export { FormikUserInputContainer as FormikUserInput };
+export { CardDetailsInputContainer as CardDetailsInput };

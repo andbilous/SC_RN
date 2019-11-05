@@ -9,103 +9,104 @@ import {
   Image,
   Picker
 } from 'react-native';
+import useProductForm from './useProductForm';
 
-type Props = {
-  cardNumber: number,
-  createBtnDisabled: boolean,
-  editBtnDisabled: boolean,
-  enabledFields: boolean,
-  name: '',
-  weight: number,
-  size: number,
-  madeIn: '',
-  onCreate: () => {},
-  onEdit: () => {},
-  changeName: () => {},
-  changeWeight: () => {},
-  changeSize: () => {},
-  changeMadeIn: () => {}
-};
+const {
+  name,
+  weight,
+  size,
+  madeIn,
+  handleChangeName,
+  handleChangeWeight,
+  handleChangeSize,
+  handleChangeMadeIn,
+  createBtnDisabled,
+  editBtnDisabled,
+  enabledFields,
+  handleOnEdit,
+  handleOnSubmit
+} = useProductForm();
 
-function ProductForm(Props: props) {
-  return (
-    <View style={styles.container}>
-      <Image
-        style={styles.bgImage}
-        source={{uri: 'https://lorempixel.com/900/1400/nightlife/8/'}}
-      />
+const ProductForm = () => (
+  <View style={styles.container}>
+    <Image
+      style={styles.bgImage}
+      source={{ uri: 'https://lorempixel.com/900/1400/nightlife/8/' }}
+    />
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          disabled={props.createBtnDisabled}
-          style={
-            props.createBtnDisabled
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity
+        disabled={createBtnDisabled}
+        style={
+            createBtnDisabled
               ? [styles.buttonContainer, styles.disabledBtn]
               : styles.buttonContainer
           }
-          onPress={props.onSubmit}>
-          <Text style={styles.loginText}>Create</Text>
-        </TouchableOpacity>
+        onPress={handleOnSubmit}
+      >
+        <Text style={styles.loginText}>Create</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          disabled={props.editBtnDisabled}
-          style={
-            props.editBtnDisabled
+      <TouchableOpacity
+        disabled={editBtnDisabled}
+        style={
+            editBtnDisabled
               ? [styles.buttonContainer, styles.disabledBtn]
               : styles.buttonContainer
           }
-          onPress={props.onEdit}>
-          <Text style={styles.loginText}>Edit</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.inputs}
-          value={props.name}
-          editable={props.enabledFields}
-          placeholder="Name"
-          underlineColorAndroid="transparent"
-          onChangeText={props.handleChangeName}
-        />
-      </View>
-
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.inputs}
-          value={props.weight}
-          editable={props.enabledFields}
-          placeholder="Weight"
-          keyboardType="numeric"
-          underlineColorAndroid="transparent"
-          onChangeText={props.handleChangeWeight}
-        />
-      </View>
-
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.inputs}
-          editable={props.enabledFields}
-          value={props.size}
-          placeholder="Size"
-          keyboardType="numeric"
-          underlineColorAndroid="transparent"
-          onChangeText={props.handleChangeSize}
-        />
-      </View>
-
-      <Picker
-        enabled={props.enabledFields}
-        selectedValue={props.madeIn}
-        style={{height: 50, width: 50}}
-        onValueChange={props.handleChangeMadeIn}>
-        <Picker.Item label="USA" value="us" />
-        <Picker.Item label="Ukraine" value="ukr" />
-        <Picker.Item label="China" value="ch" />
-      </Picker>
+        onPress={handleOnEdit}
+      >
+        <Text style={styles.loginText}>Edit</Text>
+      </TouchableOpacity>
     </View>
-  );
-}
+
+    <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.inputs}
+        value={name}
+        editable={enabledFields}
+        placeholder="Name"
+        underlineColorAndroid="transparent"
+        onChangeText={handleChangeName}
+      />
+    </View>
+
+    <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.inputs}
+        value={weight}
+        editable={enabledFields}
+        placeholder="Weight"
+        keyboardType="numeric"
+        underlineColorAndroid="transparent"
+        onChangeText={handleChangeWeight}
+      />
+    </View>
+
+    <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.inputs}
+        editable={enabledFields}
+        value={size}
+        placeholder="Size"
+        keyboardType="numeric"
+        underlineColorAndroid="transparent"
+        onChangeText={handleChangeSize}
+      />
+    </View>
+
+    <Picker
+      enabled={enabledFields}
+      selectedValue={madeIn}
+      style={{ height: 50, width: 50 }}
+      onValueChange={handleChangeMadeIn}
+    >
+      <Picker.Item label="USA" value="us" />
+      <Picker.Item label="Ukraine" value="ukr" />
+      <Picker.Item label="China" value="ch" />
+    </Picker>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
