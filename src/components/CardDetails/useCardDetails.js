@@ -1,8 +1,9 @@
 import { useState, useCallback } from 'react';
 import CreditCardInfoService from '../../services/CreditCardInfoService';
 
+
 const useCardDetails = () => {
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState([]);
   const [submitResult, setSubmitResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = useCallback((formValues) => {
@@ -10,7 +11,7 @@ const useCardDetails = () => {
     setIsLoading(true);
     new CreditCardInfoService().submit()
       .then(() => { setSubmitResult('success'); setIsLoading(false); }).catch(() => setSubmitResult('error'));
-  }, [values]);
+  }, []);
   return {
     values, handleSubmit, submitResult, isLoading,
   };

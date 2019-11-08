@@ -8,9 +8,14 @@ module.exports = {
         'no-use-before-define': 'off',
         'react/jsx-filename-extension': 'off',
         'react/prop-types': 'off',
-        'comma-dangle': 'off'
+        'comma-dangle': 'off',
+        "react-hooks/rules-of-hooks": "error", // Проверяем правила хуков
+        "react-hooks/exhaustive-deps": "warn" // Проверяем зависимости эффекта
     },
     'globals': {
         "fetch": false
-    }
+    },
+    "plugins": [
+        "react-hooks"
+    ],
 }

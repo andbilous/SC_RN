@@ -1,19 +1,23 @@
 /* eslint-disable react/destructuring-assignment */
 //  @flow
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import useCardDetails from './useCardDetails';
 
-const CardDetailsOutput = () => (
-  <View>
-    <Text style={useCardDetails().submitResult.toLowerCase().includes('error')
-      ? styles.titleError : styles.titleSubmit}
-    >
-      {useCardDetails().submitResult}
+const CardDetailsOutput = () => {
+  const isError = useCardDetails()
+    .submitResult.toLowerCase()
+    .includes('error');
 
-    </Text>
-  </View>
-);
+  return (
+    <View>
+      <Text style={isError ? styles.titleError : styles.titleSubmit}>
+        {useCardDetails().submitResult}
+      </Text>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   titleSubmit: {
     fontSize: 18,

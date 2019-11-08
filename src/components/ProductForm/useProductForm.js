@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { Alert } from 'react-native';
 
 const useProductForm = () => {
   const [name, setName] = useState('');
@@ -6,27 +7,29 @@ const useProductForm = () => {
   const [size, setSize] = useState(0);
   const [madeIn, setMadeIn] = useState('');
   const [createBtnDisabled, setCreateBtnDisabled] = useState(false);
-  const [editBtnDisabled, setEditBtnDisabled] = useState(false);
-  const [enabledFields, setEnabledFields] = useState(false);
+  const [editBtnDisabled, setEditBtnDisabled] = useState(true);
+  const [enabledFields, setEnabledFields] = useState(true);
+
   const handleChangeName = useCallback((value) => {
     setName(value);
-  }, [name]);
+  }, []);
   const handleChangeWeight = useCallback((value) => {
     setWeight(value);
   },);
   const handleChangeSize = useCallback((value) => {
     setSize(value);
-  }, [size]);
+  }, []);
   const handleChangeMadeIn = useCallback((value) => {
     setMadeIn(value);
-  }, [madeIn]);
+  }, []);
   const handleOnEdit = useCallback(() => {
     setCreateBtnDisabled(true);
     setEnabledFields(true);
   },);
   const handleOnSubmit = useCallback(() => {
+    Alert.alert('Form Submitted.Click Edit to edit Fields');
     setEnabledFields(false);
-    setEditBtnDisabled(true);
+    setEditBtnDisabled(false);
   },);
   return {
     name,

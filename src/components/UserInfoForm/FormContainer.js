@@ -28,5 +28,4 @@ const UserInfoFormContainer = () => (
     <TouchableOpacity style={styles.buttonStyle}><Text>Edit</Text></TouchableOpacity>
   </View>
 );
-
-export { UserInfoFormContainer as UserInfoForm };
+export default UserInfoFormContainer;

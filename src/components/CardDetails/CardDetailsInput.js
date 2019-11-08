@@ -17,12 +17,13 @@ type Props = {
 }
 
 function CardDetailsInput(props:Props) {
+  const { handleSubmit } = useCardDetails();
   return (
     <ScrollView style={styles.container}>
       <Formik
         validateOnChange={false}
         validateOnBlur={false}
-        onSubmit={(values) => { submitForm(values); useCardDetails().handleSubmit(values); }}
+        onSubmit={(values) => { submitForm(values); handleSubmit(values); }}
       >
         {(formikProps) => (
           <View style={styles.container}>

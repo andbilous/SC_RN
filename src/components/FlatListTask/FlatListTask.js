@@ -32,7 +32,7 @@ export default class FlatListTask extends React.Component {
   };
 
   onAddItem() {
-    const { userList, textInput,lastIndex } = this.state;
+    const { userList, textInput, lastIndex } = this.state;
     if (!textInput) { return; }
     this.setState({
       userList: [...userList,

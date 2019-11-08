@@ -1,27 +1,36 @@
 import React from 'react';
 import {
-  FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import useFlatListWithHooks from './useFlatListWithHooks';
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 10, width: 300, alignSelf: 'center',
-  },
-
   selectedItem: {
     alignItems: 'center',
     backgroundColor: 'green',
-    padding: 10,
+    padding: 10
   },
   item: {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
-    marginBottom: 2,
+    marginBottom: 2
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginTop: 10,
+    width: 300,
+    alignSelf: 'center'
   },
   listContainer: {
-    marginBottom: 5,
+    marginBottom: 5
   },
   button: {
     backgroundColor: '#fff',
@@ -33,9 +42,11 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     marginTop: 10,
     width: 300,
-    alignSelf: 'center',
-  },
+    alignSelf: 'center'
+  }
 });
+
+const keyExtractor = (item) => item.id;
 
 
 const FlatListTaskWithHooks = () => {
@@ -45,18 +56,17 @@ const FlatListTaskWithHooks = () => {
     handleInputChange,
     handleAddItem,
     handleDeleteItem,
-    handleSelectItem
+    handleChangeItem
   } = useFlatListWithHooks();
 
-  const renderItem = (item) => (
-    <View>
-      <TouchableOpacity
-        style={item.isSelected ? styles.selectedItem : styles.item}
-        onPress={() => handleSelectItem(item.key)}
-      >
-        <Text>{item.name}</Text>
-      </TouchableOpacity>
-    </View>
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      key={item.id}
+      style={item.isSelected ? styles.selectedItem : styles.item}
+      onPress={() => handleChangeItem(item.id)}
+    >
+      <Text>{item.name}</Text>
+    </TouchableOpacity>
   );
 
 
@@ -64,26 +74,19 @@ const FlatListTaskWithHooks = () => {
     <View style={styles.listContainer}>
       <FlatList
         data={dataFromServer}
-        extraData={dataFromServer}
-        keyExtractor={(item) => item.key.toString()}
-        renderItem={({ item }) => renderItem(item)}
+        keyExtractor={keyExtractor}
+        renderItem={(item) => renderItem(item)}
       />
       <TextInput
         style={styles.input}
         placeholder="Item name"
         value={textInput}
-        onChangeText={(text) => handleInputChange(text)}
+        onChangeText={handleInputChange}
       />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleAddItem}
-      >
+      <TouchableOpacity style={styles.button} onPress={handleAddItem}>
         <Text>Add Item</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleDeleteItem}
-      >
+      <TouchableOpacity style={styles.button} onPress={handleDeleteItem}>
         <Text>Delete Item</Text>
       </TouchableOpacity>
     </View>
